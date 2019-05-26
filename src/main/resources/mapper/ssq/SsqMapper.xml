@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cullen.demo.ssq.mapper.SsqMapper">
+    
+    <resultMap type="com.cullen.demo.ssq.domain.SsqDo" id="SsqResult">
+        <result property="period"    column="period"    />
+        <result property="red1"    column="red1"    />
+        <result property="red2"    column="red2"    />
+        <result property="red3"    column="red3"    />
+        <result property="red4"    column="red4"    />
+        <result property="red5"    column="red5"    />
+        <result property="red6"    column="red6"    />
+        <result property="blue"    column="blue"    />
+        <result property="lotteryDate"    column="lottery_date"    />
+        <result property="md5"    column="md5"    />
+    </resultMap>
+	
+	<sql id="selectSsqVo">
+        select period, red1, red2, red3, red4, red5, red6, blue, lottery_date, md5 from ssq
+    </sql>
+	
+    <select id="selectSsqList" parameterType="SsqDo" resultMap="SsqResult">
+        <include refid="selectSsqVo"/>
+        <where>  
+            <if test="period != null "> and period = #{period}</if>
+             <if test="red1 != null "> and red1 = #{red1}</if>
+             <if test="red2 != null "> and red2 = #{red2}</if>
+             <if test="red3 != null "> and red3 = #{red3}</if>
+             <if test="red4 != null "> and red4 = #{red4}</if>
+             <if test="red5 != null "> and red5 = #{red5}</if>
+             <if test="red6 != null "> and red6 = #{red6}</if>
+             <if test="blue != null "> and blue = #{blue}</if>
+             <if test="lotteryDate != null "> and lottery_date = #{lotteryDate}</if>
+             <if test="md5 != null  and md5 != '' "> and md5 = #{md5}</if>
+         </where>
+    </select>
+    
+    <select id="selectSsqById" parameterType="Integer" resultMap="SsqResult">
+        <include refid="selectSsqVo"/>
+        where period = #{period}
+    </select>
+        
+    <insert id="insertSsq" parameterType="SsqDo">
+        insert into ssq
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="period != null  ">period,</if>
+			<if test="red1 != null  ">red1,</if>
+			<if test="red2 != null  ">red2,</if>
+			<if test="red3 != null  ">red3,</if>
+			<if test="red4 != null  ">red4,</if>
+			<if test="red5 != null  ">red5,</if>
+			<if test="red6 != null  ">red6,</if>
+			<if test="blue != null  ">blue,</if>
+			<if test="lotteryDate != null  ">lottery_date,</if>
+			<if test="md5 != null  and md5 != ''  ">md5,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="period != null  ">#{period},</if>
+			<if test="red1 != null  ">#{red1},</if>
+			<if test="red2 != null  ">#{red2},</if>
+			<if test="red3 != null  ">#{red3},</if>
+			<if test="red4 != null  ">#{red4},</if>
+			<if test="red5 != null  ">#{red5},</if>
+			<if test="red6 != null  ">#{red6},</if>
+			<if test="blue != null  ">#{blue},</if>
+			<if test="lotteryDate != null  ">#{lotteryDate},</if>
+			<if test="md5 != null  and md5 != ''  ">#{md5},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateSsq" parameterType="SsqDo">
+        update ssq
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="red1 != null  ">red1 = #{red1},</if>
+            <if test="red2 != null  ">red2 = #{red2},</if>
+            <if test="red3 != null  ">red3 = #{red3},</if>
+            <if test="red4 != null  ">red4 = #{red4},</if>
+            <if test="red5 != null  ">red5 = #{red5},</if>
+            <if test="red6 != null  ">red6 = #{red6},</if>
+            <if test="blue != null  ">blue = #{blue},</if>
+            <if test="lotteryDate != null  ">lottery_date = #{lotteryDate},</if>
+            <if test="md5 != null  and md5 != ''  ">md5 = #{md5},</if>
+        </trim>
+        where period = #{period}
+    </update>
+
+	<delete id="deleteSsqById" parameterType="Integer">
+        delete from ssq where period = #{period}
+    </delete>
+	
+    <delete id="deleteSsqByIds" parameterType="String">
+        delete from ssq where period in 
+        <foreach item="period" collection="array" open="(" separator="," close=")">
+            #{period}
+        </foreach>
+    </delete>
+    
+</mapper>

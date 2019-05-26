@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+	<head>
+
+
+			<title>大类别</title>
+			<link rel="stylesheet" href="js/MyPage/MyPageCss.css" type="text/css" />
+			<script type="text/javascript" src="js/jquery.js"></script>
+			<script type="text/javascript" src="js/jquery.highlight.js"></script>
+			<script type="text/javascript" src="js/MyPage/MyPage.js"></script>
+			<link href="js/g.css" rel="stylesheet" type="text/css" />
+			<script src="js/date.js" type="text/javascript"></script>
+			<style type="text/css">
+a {
+	color: #00c;
+	margin: 0px 3px;
+	font: bolder;
+	font-family: serif;
+	text-decoration: none;
+	font-family: serif;
+}
+
+a:hover {
+	color: #FF0508;
+	text-decoration: underline
+}
+</style>
+	</head>
+
+	<body style="background-color: scrollbar">
+
+
+		<center>
+			<div id="dataList" th:no>
+			
+
+								
+				 
+				  <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/><br/>
+				
+				<table>
+
+					<tr th:each="item : ${results}">
+
+					</tr>
+
+					<logic:iterate id="type" name="result" property="siteCountMap" indexId="index">	
+					<tr>
+					<td>
+					<a href="disSearch.do?check=dis&site=${type.key}" target="_blank">${type.key}&nbsp;&nbsp;(${type.value })</a>				 
+				 	</td>
+				 	<td>
+				 	</td>
+				 	</tr>
+				 	<tr></tr>	<tr></tr>				 
+					</logic:iterate>
+					
+					</table>
+	
+
+                <p align="center">图片总数:${result.totalCount }</p>
+               
+
+				
+			</div>
+		</center>
+
+
+
+
+	</body>
+</html>

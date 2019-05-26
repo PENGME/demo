@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+    <title>大类别</title>
+    <link rel="stylesheet" th:href="@{/js/MyPage/MyPageCss.css}" type="text/css"/>
+    <script type="text/javascript" th:href="@{/js/jquery.js}"></script>
+    <script type="text/javascript" th:href="@{/js/jquery.highlight.js}"></script>
+    <script type="text/javascript" th:href="@{/js/MyPage/MyPage.js}"></script>
+    <link th:href="@{/js/g.css}" rel="stylesheet" type="text/css"/>
+    <script th:href="@{/js/date.js}" type="text/javascript"></script>
+    <style type="text/css">
+        a {
+            color: #00c;
+            margin: 0px 3px;
+            font-weight:bold;
+            font-family: serif;
+            text-decoration: none;
+            font-family: serif;
+        }
+
+        a:hover {
+            color: #FF0508;
+            text-decoration: underline
+        }
+    </style>
+</head>
+
+<body style="background-color: scrollbar">
+
+
+<center>
+    <div id="dataList">
+
+
+
+        <table>
+            <tr th:each="type : ${allBigType}">
+                <td>
+                    <a href="javascript:void(0);"  th:onclick="td_click([[${type.key}]]);" target="_blank" th:text="${type.key} + '(' + ${type.value} + ')' "></a>
+                </td>
+                <td>
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+</center>
+
+
+</body>
+
+<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+<script>
+
+
+    function td_click(key) {
+        window.open(ctx + "search/smallType?bigType=" + key);
+    }
+
+</script>
+
+</html>

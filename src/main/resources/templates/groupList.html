@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+	<head>
+			<title>${result.mode.bigType}__${result.mode.smallType}</title>
+			<link rel="stylesheet" href="js/MyPage/MyPageCss.css" type="text/css" />
+			<script type="text/javascript" src="js/jquery.js"></script>
+			<script type="text/javascript" src="js/jquery.highlight.js"></script>
+			<script type="text/javascript" src="js/MyPage/MyPage.js"></script>
+			<link href="js/g.css" rel="stylesheet" type="text/css" />
+			<script src="js/date.js" type="text/javascript"></script>
+			<style type="text/css">
+a {
+	color: #00c;
+	margin: 0px 3px;
+	font: bolder;
+	font-family: serif;
+	text-decoration: none;
+	font-family: serif;
+}
+
+a:hover {
+	color: #FF0508;
+	text-decoration: underline
+}
+
+</style>
+
+
+							<script type="text/javascript">
+
+     $(document).ready(function(){               
+            //分页
+	           $("#PageCell").page({
+					start: ${result.mode.limitStart}+1,
+					count:${result.totalCount},
+					showCount: ${result.mode.limitEnd-result.mode.limitStart},
+					showPageCount:10,
+					pageParamName:"&page",			
+					showOnlyFirst:false			
+			});
+					
+     })
+</script>
+
+
+	</head>
+				<div>
+
+				<logic:notEmpty name="result">
+				<table>				
+					<logic:iterate id="bean" name="result" property="dataList" indexId="index">					
+					<tr><td>	
+					<logic:lessEqual value="1" name="bean" property="count">
+					   <a href="${bean.src }" target="_blank"><img src="${bean.src }"  title="${bean.title }"/></a>
+					</logic:lessEqual>
+					
+					
+					<logic:greaterThan value="1" name="bean" property="count">
+					<a href="disSearch.do?check=all&site=${result.mode.bigType }&cate=${result.mode.smallType}&title=${bean.title}" title="点击查看更多关于 (${bean.title }) 的图片" target="_blank"><img src="${bean.src }"  title="点击查看更多关于 (${bean.title }) 的图片"/></a>
+					</logic:greaterThan>
+					
+					</td>
+					<td>${bean.title }(共${bean.count }张)</td>
+					</tr>
+							 	
+					</logic:iterate>
+					</table>
+					</logic:notEmpty>
+					
+					</ul>
+	
+
+                    <!-- 分页 -->
+					<div id="PageCell"></div>
+	</body>
+
+</html>

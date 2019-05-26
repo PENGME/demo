@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>${bigType }__${type }</title>
+    <link rel="stylesheet" href="js/MyPage/MyPageCss.css" type="text/css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.highlight.js"></script>
+    <script type="text/javascript" src="js/MyPage/MyPage.js"></script>
+    <link href="js/g.css" rel="stylesheet" type="text/css"/>
+    <script src="js/date.js" type="text/javascript"></script>
+    <style type="text/css">
+        a {
+            color: #00c;
+            margin: 0px 3px;
+            font: bolder;
+            font-family: serif;
+            text-decoration: none;
+            font-family: serif;
+        }
+
+        a:hover {
+            color: #FF0508;
+            text-decoration: underline
+        }
+
+    </style>
+
+
+    <script type="text/javascript">
+
+        // $(document).ready(function(){
+        //        //分页
+        //           $("#PageCell").page({
+        // 			start: ${start},
+        // 			count:${count},
+        // 			showCount: ${showCount},
+        // 			showPageCount:10,
+        // 			pageParamName:"&page",
+        // 			showOnlyFirst:false
+        // 	});
+        //
+        // })
+    </script>
+
+
+</head>
+
+
+<table>
+
+    <tr th:each="bean: ${list}">
+        <td>
+            <a th:href="${bean.src }" th:attr="title=${bean.title }" target="_blank">
+                <img th:src="${bean.src }" th:attr="src=${bean.src},title=${bean.title }"/>
+            </a>
+        </td>
+        <td th:text="${bean.title }"></td>
+    </tr>
+
+</table>
+</body>
+
+</html>
